@@ -2,10 +2,14 @@
 
 namespace turimgAdmin;
 
+use turimgAdmin\command\make\Controller;
+
 class Service extends \think\Service
 {
     public function boot()
     {
-        halt(123123);
+        $this->commands([
+            Controller::class
+        ]);
     }
 }

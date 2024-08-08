@@ -3,12 +3,12 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "turimgAdmin\\": "src/"
+            "turingAdmin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "turimgAdmin\\tests\\": "tests/"
+            "turingAdmin\\tests\\": "tests/"
         }
     },
     "authors": [
