@@ -1,6 +1,6 @@
 <?php
 
-namespace turimgAdmin\command\make;
+namespace turingAdmin\command\make;
 
 use think\console\input\Argument as InputArgument;
 

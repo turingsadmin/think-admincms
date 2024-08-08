@@ -1,6 +1,6 @@
 <?php
 
-namespace turimgAdmin\command;
+namespace turingAdmin\command;
 
 use think\console\Command;
 use think\console\Input;

@@ -1,6 +1,6 @@
 <?php
 
-namespace turimgAdmin\Controller;
+namespace turingAdmin\Controller;
 
 use think\App;
 use think\Request;
