@@ -5,11 +5,13 @@ namespace turingAdmin\Controller;
 use think\App;
 use think\Request;
 use think\Response;
+use turingAdmin\model\TraitModel;
 use turingAdmin\Service\JsonService;
 
 
 abstract class BaseController
 {
+
     /**
      * 请求Request实例
      * @var \think\Request
@@ -29,13 +31,20 @@ abstract class BaseController
         $this->initialize();
     }
 
+    public function __destruct( )
+    {
+
+    }
+
     // 初始化加载
     protected function initialize() : void
     {}
 
 
-    public function success( string $message = 'SUCCESS' , ?array $data = [] , int $code = 1 , int $show = 0 ) : Response
+    public function success( string $message = 'SUCCESS' , array | object $data = [] , int $code = 1 , int $show = 0 ) : Response
     {
+//        if(is_object($data)) $data = $data->toArray();
+
         return JsonService::success($message , $data , $code , $show);
     }
 

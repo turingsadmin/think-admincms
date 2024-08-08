@@ -26,7 +26,6 @@
         "think":{
             "services":[
                 "turingAdmin\\Service",
-                "turingAdmin\\route\\Service"
             ]
         }
     }
