@@ -3,7 +3,12 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Turingsadmin\\ThinkAdmincms\\": "src/"
+            "turimgAdmin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "turimgAdmin\\tests\\": "tests/"
         }
     },
     "authors": [
@@ -13,5 +18,7 @@
         }
     ],
     "minimum-stability": "alpha",
-    "require": {}
+    "require": {
+        "php": "^8.0",
+    }
 }
