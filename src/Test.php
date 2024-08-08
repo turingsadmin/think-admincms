@@ -1,7 +1,7 @@
 <?php
-namespace turimgAdmin\Test;
+namespace turimgAdmin;
 
-class TestA
+class Test
 {
     public function a()
     {
