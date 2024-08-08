@@ -1,8 +1,8 @@
 <?php
 
-namespace turimgAdmin;
+namespace turingAdmin;
 
-use turimgAdmin\command\make\Controller;
+use turingAdmin\command\make\Controller;
 
 class Service extends \think\Service
 {

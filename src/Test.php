@@ -1,5 +1,5 @@
 <?php
-namespace turimgAdmin;
+namespace turingAdmin;
 
 class Test
 {
