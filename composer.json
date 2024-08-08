@@ -1,0 +1,17 @@
+{
+    "name": "turingsadmin/think-admincms",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Turingsadmin\\ThinkAdmincms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Xiaobin",
+            "email": "850009244@qq.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {}
+}
