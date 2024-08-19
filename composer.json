@@ -6,11 +6,6 @@
             "turingAdmin\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "turingAdmin\\tests\\": "tests/"
-        }
-    },
     "authors": [
         {
             "name": "Xiaobin",
@@ -25,7 +20,7 @@
     "extra":{
         "think":{
             "services":[
-                "turingAdmin\\Service",
+                "turingAdmin\\Service"
             ]
         }
     }
