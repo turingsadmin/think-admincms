@@ -19,7 +19,8 @@
     "extra":{
         "think":{
             "services":[
-                "turingAdmin\\Service"
+                "turingAdmin\\Service",
+                "turingAdmin\\annotation\\Service"
             ]
         }
     }
