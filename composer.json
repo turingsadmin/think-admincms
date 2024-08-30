@@ -14,14 +14,22 @@
     ],
     "minimum-stability": "alpha",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "topthink/framework": "^6.0 || ^8.0",
+        "ergebnis/classy": "^1.4"
+    },
+    "require-dev": {
+        "topthink/think-ide-helper": "^1.0"
     },
     "extra":{
         "think":{
             "services":[
                 "turingAdmins\\Service",
                 "turingAdmins\\annotation\\Service"
-            ]
+            ],
+            "config": {
+                "annotation": "src/annotation/config.php"
+            }
         }
     }
 }

@@ -4,8 +4,19 @@ namespace turingAdmins\annotation;
 
 class Service extends \think\Service
 {
-    public function boot()
+    use InteractsWithInject , InteractsWithRoute , InteractsWithModel;
+    protected Reader $reader;
+    public function boot( Reader $reader)
     {
-        halt('annotation');
+        $this->reader = $reader;
+
+        $this->autoInject();
+
+        $this->registerAnnotationRoute();
+
+        $this->detectModelAnnotations();
+
     }
+
+
 }
