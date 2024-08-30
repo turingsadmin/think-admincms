@@ -3,7 +3,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "turingAdmin\\": "src/"
+            "turingAdmins\\": "src/"
         }
     },
     "authors": [
@@ -19,8 +19,8 @@
     "extra":{
         "think":{
             "services":[
-                "turingAdmin\\Service",
-                "turingAdmin\\annotation\\Service"
+                "turingAdmins\\Service",
+                "turingAdmins\\annotation\\Service"
             ]
         }
     }

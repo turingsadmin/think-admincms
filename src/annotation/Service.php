@@ -1,6 +1,6 @@
 <?php
 
-namespace turingAdmin\annotation;
+namespace turingAdmins\annotation;
 
 class Service extends \think\Service
 {
