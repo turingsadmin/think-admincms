@@ -11,6 +11,6 @@ class DeleteMapper extends RouteMapper
         public array  $options = []
     )
     {
-        parent::__construct('GET', $rule, $options);
+        parent::__construct('DELETE', $rule, $options);
     }
 }

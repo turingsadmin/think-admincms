@@ -26,7 +26,7 @@ abstract class BaseMapper
      * @throws \think\db\exception\DbException
      * @throws \think\db\exception\ModelNotFoundException
      */
-    protected function find( int $id)
+    public function find( int $id)
     {
         return $this->model->find($id);
     }
@@ -41,9 +41,45 @@ abstract class BaseMapper
      * @Author Xiaobin
      * @return mixed
      */
-    public function getPageList() : mixed
+    public function getPageList( ? array $query = [] , ? array $order = []) : mixed
     {
-        return $this->model->getPageList();
+        $page       =   $this->request->get('page' , 1);
+        $pageSize   =   $this->request->get('page_size' , 15);
+        if ($query)
+        {
+            unset($query['page'] , $query['page_size']);
+        }
+        return  $this->model
+            ->page( ($page - 1) * $pageSize  , $pageSize)
+            -> withSearch(array_keys($query) , $query)
+            -> order($order)
+            ->select();
+    }
+
+
+    /**
+     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+     *   从删除中读取可恢复内容
+     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+     * @func   getPageListByRecycle
+     * @Time 2024年09月02日 15:39:03
+     * @Author Xiaobin
+     * @return void
+     */
+    public function getPageListByRecycle( ?array $query , ?array $order = []) : mixed
+    {
+        $page       =   $this->request->get('page' , 1);
+        $pageSize   =   $this->request->get('page_size' , 15);
+        if ($query)
+        {
+            unset($query['page'] , $query['page_size']);
+        }
+        return $this->model
+            ->page( ($page - 1) * $pageSize  , $pageSize)
+            -> withSearch(array_keys($query) , $query)
+            -> order($order)
+            -> onlyTrashed()
+            -> select();
     }
 
 
@@ -90,7 +126,7 @@ abstract class BaseMapper
      * @param int $id   数据id
      * @return bool
      */
-    public function forceDelete( int $id )
+    public function realDelete( int $id )
     {
         $model  =   $this->model->findOrEmpty($id);
         return $model->force()->delete();
@@ -113,9 +149,11 @@ abstract class BaseMapper
     }
 
 
-    protected function uploadFile()
+    public function recovery( int $id) : bool
     {
-
+        $model  =   $this->model->onlyTrashed()->findOrEmpty($id);
+        return $model->restore();
     }
+
 
 }

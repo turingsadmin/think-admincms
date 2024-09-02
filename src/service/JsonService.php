@@ -4,6 +4,7 @@ namespace turingAdmins\service;
 use think\App;
 use think\Request;
 use think\response\{Json , Jsonp};
+use think\facade\Db;
 trait  JsonService
 {
 
@@ -20,42 +21,80 @@ trait  JsonService
         int    $show    =   0
     ) : Json
     {
-        # 如果message 是数组
-        if (is_array($message))
-        {
-            return $this->reslut( data:$message ,code: $code , show: $show);
-        } else if (is_object($message) )
-        {
 
-            return $this->reslut(data:[
-                'lists' =>  $message->select(),
-                'page'  =>  $this->request->get('page' , 1),
-                'count' =>  $message->count(),
-                'page_size' =>  $this->request->get('page_size' , 15)
-            ] , code:$code , show:$show);
-        } else if(is_object($data))
-        {
-            halt(1);
-        }
        return $this->reslut( $message , $data , $code , $show );
     }
 
 
+    public function fail(
+        mixed $message = 'ERROR',
+        array | object  $data    =   [],
+        int    $code    =   1,
+        int    $show    =   0
+    ) : Json
+    {
+        return  $this->reslut($message , $data , $code , $show);
+    }
+
+
     protected function reslut(
-        string $message = 'SUCCESS',
-        ?array $data    = [] ,
+        mixed $message = 'SUCCESS',
+        mixed $data    = [] ,
         int     $code   =   1,
         int     $show   =   0
 
     ) : Json | Jsonp
     {
 
+
+        if(is_object($message))
+        {
+            $data = $message;
+            $message = $code == 1 ? 'SUCCESS' : 'ERROR';
+        }
+
+
+
         $result = [
-            'code'      =>  1,
-            'message'   =>  $message ,
-            'data'      =>  $data,
-            'show'      =>  $show
+            'code'  =>  $code,
+            'show'  =>  $show,
+            'message'   =>  $message
         ];
+
+
+        $array = is_object($data) ? $data->toArray() : $data;
+
+
+        function isArrayOneDimensional($array) {
+            // 检查数组是否为空
+            if (empty($array)) {
+                return true; // 空数组可以视为“一维”的，但实际情况可能需要根据需求调整
+            }
+
+            foreach ($array as $element) {
+                // 如果数组中的任何元素是数组，则它不是一维的
+                if (is_array($element)) {
+                    return false;
+                }
+            }
+
+            // 如果所有元素都不是数组，则它是一维的
+            return true;
+        }
+
+        if (isArrayOneDimensional($array))
+        {
+            $message  = $code == 1 ? 'SUCCESS' : 'ERROR';
+            $result['data'] = $array;
+        }else{
+            $result['data']  = [
+                'list'  =>  $array,
+                'count' => $data->count(),
+                'page'  =>  $this->request->get('page' ,1),
+                'page_size' =>  $this->request->get('page_size' , 15),
+            ];
+        }
+
         return response(type: 'json')->data($result)->code(200);
     }
 }

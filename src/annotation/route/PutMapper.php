@@ -11,6 +11,6 @@ class PutMapper extends RouteMapper
         public array  $options = []
     )
     {
-        parent::__construct('GET', $rule, $options);
+        parent::__construct('PUT', $rule, $options);
     }
 }

@@ -109,10 +109,10 @@ trait InteractsWithRoute
             //方法
             foreach ($refClass->getMethods(ReflectionMethod::IS_PUBLIC) as $refMethod) {
                 if ($routeAnn = $this->reader->getAnnotation($refMethod, RouteMapper::class)) {
-
                     $routes[] = function () use ($routeAnn, $prefix, $refMethod) {
                         //注册路由
-                        $rule = $this->route->rule($routeAnn->rule, "{$prefix}/{$refMethod->getName()}", $routeAnn->method);
+
+                        $rule = $this->route->rule($routeAnn->rule, "{$prefix}@{$refMethod->getName()}", $routeAnn->method);
 
                         $rule->option($routeAnn->options);
 
